@@ -1,0 +1,38 @@
+doctype html
+html
+    head 
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
+        link(rel='stylesheet' href='/css/style.css')
+        link(rel='short icon' type='image/jpg' href='/img/3logobig.jpg')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
+        title HORIZON  |  #{title} 
+
+    body
+        // Header
+        include _header
+
+        // CONTENT
+        block content
+            h1 this is a placeholder       
+        // Footer
+        include _footer
+            //-  for RUNNING AXIOS script
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js'
+            integrity='sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=='
+            crossorigin='anonymous'
+            referrerpolicy='no-referrer')
+    
+        script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+        script(src='https://js.stripe.com/v3/')
+        //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js' integrity='sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==' crossorigin='anonymous' referrerpolicy='no-referrer')
+        //- script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+        //- script(src='/js/alerts.js')
+        //- script(src='/js/updateSettings.js')
+        //- script(src='/js/login.js')
+        
+        //- script(src='/js/trail.js')
+        script(src='/js/bundle.js')
+        
+        
