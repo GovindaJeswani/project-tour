@@ -1,6 +1,6 @@
 /* eslint-disable */
 import '@babel/polyfill';
-import { login, logout ,signup} from './auth';
+import { login, logout ,signup,forgetPassword} from './auth';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
@@ -17,6 +17,10 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 
+// for deletion in admin 
+const deleteBtn = document.querySelector('.btn-delete')
+const forgetPass = document.querySelector('.link')      
+
 // console.log('loginForm');
 
 // DELEGATION
@@ -25,6 +29,13 @@ const bookBtn = document.getElementById('book-tour');
 //   displayMap(locations);
 // }
 
+// if (forgetPass)
+// forgetPass.addEventListener('click',()=>{
+  // e.preventDefault();
+  // console.log('hello');
+  // const email = document.getElementById('email').value;
+  // forgetPassword(email)
+  // })
 
 //  login
 if (loginForm)
@@ -86,14 +97,33 @@ if (userPasswordForm)
     document.getElementById('password-confirm').value = '';
   });
 
-//  book tour btn
-if (bookBtn)
-  bookBtn.addEventListener('click', e => {
-    e.target.textContent = 'Processing...';
-    const { tourId } = e.target.dataset;
-    bookTour(tourId);
-  });
-
   
+  //  book tour btn
+  if (bookBtn)
+    bookBtn.addEventListener('click', e => {
+      e.target.textContent = 'Processing...';
+      const { tourId } = e.target.dataset;
+      bookTour(tourId);
+    });
+    
+//   // delete booking from admin 
+if(deleteBtn)
+  deleteBtn.addEventListener('click', ()=> {
+    console.log('deleted');
+
+  // const { tourId } = e.target.dataset;
+  bookTour(tourId);
+});
+// deleteBtn.addEventListener('click',()=>{
+//   console.log('deleted');
+// })
+
+
+if (forgetPass)
+  forgetPass.addEventListener('click',(e)=>{    
+    const email = document.getElementById('email').value;
+    forgetPassword(email);
+  })
+    
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);

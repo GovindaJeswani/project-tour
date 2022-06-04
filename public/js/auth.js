@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+
 import axios from "axios";
 import { showAlert } from "./alerts";
 // Login:
@@ -39,9 +40,9 @@ export const signup = async (name, email, password, passwordConfirm) => {
       },
     });
     if (res.data.status === "success") {
-      showAlert("success", "Signup successfully!");
+      showAlert("success", `Signup successfully! Welcome ${name}`);
       window.setTimeout(() => {
-        location.assign("/");
+        location.assign("/overview");
       }, 1500);
     }
   } catch (err) {
@@ -56,16 +57,37 @@ export const logout = async () => {
     const res = await axios({
       method: "GET",
       url: "/api/user/logout",
-      // url: "http://127.0.0.1:3000/api/user/logout",
     });
     
     if ((res.data.status = "success")) {
       location.reload(true);
 
-      location.assign("/");
+      location.assign("/overview");
     }
   } catch (err) {
     
+    console.log(err.response);
+    showAlert("error", err.response.data.message);
+  }
+};
+
+export const forgetPassword =  async(email)=>{
+  try {
+    const res = await axios({
+        method: "POST",
+      url: "api/user/forgotPassword",
+      data: {
+        email,
+      },
+    });
+
+    if (res.data.status === "success") {
+      showAlert("success", `Password Reset Token sent to your email ${email}  successfully!`);
+      window.setTimeout(() => {
+        location.assign("https://mailtrap.io/inboxes");
+      }, 600);
+    }
+  } catch (err) {
     console.log(err.response);
     showAlert("error", err.response.data.message);
   }
