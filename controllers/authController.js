@@ -252,10 +252,3 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-
-
-// "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-// "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
-
-// "watch:js": "rollup ./public/js/index.js -o ./public/js/bundle.js -f cjs -w",
-// "build:js": "rollup  ./public/js/index.js --file ./public/js/bundle.js"

@@ -50,13 +50,13 @@ exports.getAccount = catchAsync(async (req, res) => {
   const bookings = await Booking.find({
       user: req.user.id
   });
-  const tourIDs = bookings.map(el => el.tour.id);
-  const tours = await Tour.find({ _id: { $in: tourIDs } });
+  // const tourIDs = bookings.map(el => el.tour.id);
+  // const tours = await Tour.find({ _id: { $in: tourIDs } });
 
   res.status(200).render('account', {
       title: 'Your account',
       route,
-      tours
+      // tours
   });
 });
 
@@ -95,11 +95,11 @@ exports.getSignupForm = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getEmail = catchAsync(async (req, res, next) => {
-  res.status(200).render("https://mailtrap.io/inboxes", {
-    title: "Reset Email",
-  });
-});
+// exports.getEmail = catchAsync(async (req, res, next) => {
+//   res.status(200).render("https://mailtrap.io/inboxes", {
+//     title: "Reset Email",
+//   });
+// });
 
 
 exports.getPasswordForget = catchAsync(async(req,res,next)=>{

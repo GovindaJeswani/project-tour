@@ -29,6 +29,12 @@ block content
                             +navItem('/manage-tours', 'Manage tours', 'map')
                             +navItem('/manage-users', 'Manage users', 'user')
                             +navItem('/manage-bookings', 'Manage bookings', 'briefcase')
+                - if (user.role === 'lead-guide')
+                    .admin-nav
+                        h5.admin-nav__heading lead-guide
+                        ul.side-nav
+                            +navItem('/manage-tours', 'Manage tours', 'map')
+                            +navItem('/manage-bookings', 'Manage bookings', 'briefcase')
             if route === '/me'
                 .user-view__content
                     .user-view__form-container
@@ -169,7 +175,7 @@ block content
                                             span.card__footer-value= tour.ratingsAverage
                                             | 
                                             span.card__footer-text= `rating (${tour.ratingsQuantity})`
-                                        a.btn.btn--small.btn-delete() Delete
+                                        a.btn.btn--small.btn-delete__tour.btn-delete(data-tour-id=`${tour.id}`) Delete
                 else if userData.route === '/manage-bookings'
                     main.main
                         .card-container-mytours
@@ -205,7 +211,7 @@ block content
 
                                     .card__footer-admin
                                         a.btn.btn--green.btn--small(href=`/tour/${booking.tour.slug}`) Details
-                                        a.btn.btn--small.btn-delete() Delete
+                                        a.btn.btn--small.btn-delete__booking.btn-delete(data-booking-id=`${booking.id}`) Delete
                 else if userData.route === '/manage-users'
                     .list-container
                         each user in userData.users
@@ -216,4 +222,4 @@ block content
                                     .booking-info__content
                                         span= user.email
                                         span.user-role= `Role - ${user.role}`
-                                a.btn.btn--small.btn-delete__booking.delete() Delete
+                                a.btn.btn--small.btn-delete__users.btn-delete(data-user-id=`${user.id}`) Delete

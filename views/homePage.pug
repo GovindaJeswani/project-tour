@@ -219,7 +219,10 @@ body
                     span.form__radio-button
                     |                                             Large tour group
               .form__group
-                a.btn.btn--green(href='/login') Next step &rarr;
+                if user
+                  a.btn.btn--green(href='/') Next step &rarr;
+                else
+                  a.btn.btn--green(href='/login') Next step &rarr;
   footer.footer
     .footer__logo-box
       picture.footer__logo
@@ -261,4 +264,7 @@ body
           | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis eius, qui vitae sapiente aliquid nesciunt nemo sunt deleniti dignissimos nihil ullam. Ipsa sit dolorum earum eos tempore soluta tenetur voluptate.
           | Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore exercitationem id voluptatibus enim nihil reprehenderit, ratione dolore, suscipit assumenda asperiores dolor? Quos voluptate explicabo quam, blanditiis sed deserunt possimus ducimus.
           | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea atque vitae nulla sunt dolore architecto, deleniti consequuntur sapiente, tempore repellendus eligendi accusamus odio neque voluptates iure labore, voluptatem velit vel.
-        a.btn.btn--green(href='/login') Book now
+        if user
+          a.btn.btn--green(href='/') Book now
+        else
+          a.btn.btn--green.span-all-rows(href='/login') Log in to book tour 

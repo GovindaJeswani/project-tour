@@ -4,6 +4,7 @@ import { login, logout ,signup,forgetPassword} from './auth';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { manageBooking, manageTour, manageUser } from './admin';
 
 // DOM ELEMENTS
 
@@ -16,12 +17,13 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
-
-// for deletion in admin 
-const deleteBtn = document.querySelector('.btn-delete')
 const forgetPass = document.querySelector('.link')      
 
-// console.log('loginForm');
+// for deletion in admin 
+const deleteTourBtn = document.querySelectorAll('.btn-delete__tour')
+const deleteUserBtn = document.querySelectorAll('.btn-delete__users')
+const deleteBookingBtn = document.querySelectorAll  ('.btn-delete__booking')
+
 
 // DELEGATION
 // if (mapBox) {
@@ -29,13 +31,6 @@ const forgetPass = document.querySelector('.link')
 //   displayMap(locations);
 // }
 
-// if (forgetPass)
-// forgetPass.addEventListener('click',()=>{
-  // e.preventDefault();
-  // console.log('hello');
-  // const email = document.getElementById('email').value;
-  // forgetPassword(email)
-  // })
 
 //  login
 if (loginForm)
@@ -71,10 +66,11 @@ if (userDataForm)
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form);
+    // console.log(form);
 
     updateSettings(form, 'data');
   });
+  
 
 
   // update user password
@@ -106,24 +102,42 @@ if (userPasswordForm)
       bookTour(tourId);
     });
     
-//   // delete booking from admin 
-if(deleteBtn)
-  deleteBtn.addEventListener('click', ()=> {
-    console.log('deleted');
-
-  // const { tourId } = e.target.dataset;
-  bookTour(tourId);
-});
-// deleteBtn.addEventListener('click',()=>{
-//   console.log('deleted');
-// })
+    //  Forget password...
+    if (forgetPass)
+      forgetPass.addEventListener('click',(e)=>{    
+        const email = document.getElementById('email').value;
+        forgetPassword(email);
+      })
 
 
-if (forgetPass)
-  forgetPass.addEventListener('click',(e)=>{    
-    const email = document.getElementById('email').value;
-    forgetPassword(email);
+  if(deleteTourBtn)  
+    deleteTourBtn.forEach(el=>{addEventListener('click',(e)=>{
+      e.target.textContent = 'deleted'
+    const { tourId } = e.target.dataset;
+    manageTour(tourId);
   })
-    
+})
+
+
+  if(deleteUserBtn)
+
+  deleteUserBtn.forEach(el=>{el.addEventListener('click',(e)=>{
+      const { userId } = e.target.dataset;
+      e.target.textContent = 'deleted'
+      manageUser(userId)
+  })
+    // if (user.role==='guide')      
+  })
+
+  if(deleteBookingBtn)
+
+  deleteBookingBtn.forEach(el=>{el.addEventListener('click',(e)=>{
+      const { bookingId } = e.target.dataset;
+      e.target.textContent = 'deleted'
+      manageBooking(bookingId)
+  })
+  })
+
+  
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);
